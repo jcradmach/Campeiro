@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Imagens/ico.png">
+     <title>Expressão do Gaudério</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <link rel="icon" type="image/png" href="Imagens/ico.png">
+    
+    <link href="css/style3.css" rel="stylesheet">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <link rel="manifest" href="/manifest.json">
+
+</head>
+<body>
+    
+<div class="mainscreen">
+
+  <nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid">
+            <!-- Mobile: Primeira linha - Logo + Carrinho + Toggle -->
+            <div class="d-flex w-100 justify-content-between align-items-center d-lg-none">
+                <!-- Logo -->
+                <a class="navbar-brand d-flex align-items-center" href="catalogo.html">
+                    <img src="Imagens/logo.png" alt="logo" class="logo-header me-2">
+                    <span>Expressão do Gaudério</span>
+                </a>
+                
+                <!-- Carrinho + Toggle -->
+                <div class="d-flex align-items-center">
+                    <a href="carrinho.html" class="btn btn-link text-white position-relative px-2 me-2">
+                        <i class="fas fa-shopping-cart fs-5"></i>
+                        <span id="carrinho-contador" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                            0
+                        </span>
+                    </a>
+                    
+                    <button class="navbar-toggler border-0" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav">
+                        <i class="fas fa-bars"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- Desktop: Logo (esquerda) -->
+            <a class="navbar-brand d-none d-lg-flex align-items-center" href="index.html">
+                <img src="Imagens/logo.png" alt="logo" class="logo-header me-2">
+                <span>Expressão do Gaudério</span>
+            </a>
+            
+            <!-- Desktop: Carrinho + User Info (direita) -->
+            <div class="d-none d-lg-flex align-items-center ms-auto">
+                <!-- Carrinho -->
+                <a href="carrinho.html" class="btn btn-link text-white position-relative px-3 me-3">
+                    <i class="fas fa-shopping-cart fs-5"></i>
+                    <span id="carrinho-contador-desktop" class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-danger cart-badge">
+                        0
+                    </span>
+                </a>
+                
+                <!-- User Info -->
+                <div class="d-flex align-items-center user-section">
+                    <i class="fas fa-user-circle me-2"></i>
+                    <span class="text-white me-3">Olá, <span id="user-name">usuário</span></span>
+                    
+                    <div class="d-none" id="user-info">
+                        <button class="btn btn-sm btn-outline-light" id="logout-btn">
+                            <i class="fas fa-sign-out-alt me-1"></i>Sair
+                        </button>
+                    </div>
+                    
+                    <div class="auth-buttons" id="auth-buttons">
+                        <a href="cadastro.html" class="btn btn-sm btn-outline-light me-2">
+                            <i class="fas fa-user-plus me-1"></i>Cadastre-se
+                        </a>
+                        <a href="login.html" class="btn btn-sm btn-outline-light">
+                            <i class="fas fa-sign-in-alt me-1"></i>Entrar
+                        </a>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Menu Collapse -->
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <!-- Mobile: Segunda linha - User Info -->
+                <div class="d-lg-none">
+                    <div class="d-flex justify-content-between align-items-center user-section">
+                        <div class="d-flex align-items-center">
+                            <i class="fas fa-user-circle me-2"></i>
+                            <span class="text-white">Olá, <span id="user-namem">usuário</span></span>
+                        </div>
+                        
+                        <div class="d-none" id="user-infom">
+                            <button class="btn btn-sm btn-outline-light" id="logout-btnm">
+                                <i class="fas fa-sign-out-alt me-1"></i>Sair
+                            </button>
+                        </div>
+                        
+                        <div class="auth-buttons" id="auth-buttonsm">
+                            <a href="cadastro.html" class="btn btn-sm btn-outline-light me-2">
+                                <i class="fas fa-user-plus me-1"></i>Cadastre-se
+                            </a>
+                            <a href="login.html" class="btn btn-sm btn-outline-light">
+                                <i class="fas fa-sign-in-alt me-1"></i>Entrar
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Menu Items -->
+                <ul class="navbar-nav">
+                    <!-- Seção Admin -->
+                    <div id="adminicons" class="admin-section">
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="menu.html">
+                            <i class="fas fa-tasks me-2"></i>
+                            Painel Admin
+                        </a>
+                    </li>
+                </div>
+                    
+                    <!-- Seção User -->
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="pedidos.html">
+                            <i class="fas fa-shopping-bag me-2"></i>
+                            Meus Pedidos
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="meusdados.html">
+                            <i class="fas fa-user-edit me-2"></i>
+                            Minha Conta
+                        </a>
+                    </li>
+                    
+                    <li class="nav-item">
+                        <a class="nav-link d-flex align-items-center" href="ajuda.html">
+                            <i class="fas fa-life-ring me-2"></i>
+                            Ajuda
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+</nav>
+    
+
+  <div class="carousel">
+                <button class="carousel-button prev"><i class="fas fa-chevron-left"></i></button>
+                <div class="carousel-inner">
+                    <div class="carousel-item active"><img src="Imagens/Capa.png" alt="Promoção 1"></div>
+                    <div class="carousel-item"><img src="Imagens/Capa.png" alt="Promoção 2"></div>
+                    <div class="carousel-item"><img src="Imagens/Capa.png" alt="Promoção 3"></div>
+                </div>
+                <button class="carousel-button next"><i class="fas fa-chevron-right"></i></button>
+            </div>
+            
+    <div class="page-container" style="margin-top: 10rem;">
+            
+            <div class="container mt-4">
+
+                <!-- Barra de busca e botão de voltar -->
+              <div id="controle-produtos" class="d-flex justify-content-between align-items-center mb-3" style="display: none;">
+                    <button id="btn-voltar-categorias" class="btn btn-outline-secondary">
+                    <i class="fas fa-arrow-left"></i> Voltar
+                    </button>
+                    <input type="text" id="busca-produto" class="form-control w-50" placeholder="Buscar produto...">
+              </div>
+          
+              <!-- Produtos -->
+              <div class="row" id="categorias-container">
+                <div class="d-flex justify-content-center flex-wrap gap-4">
+                  <!-- Categorias serão carregadas dinamicamente aqui -->
+                </div>
+              </div>
+
+              <div class="row" id="produtos-container" style="display: none;">
+                <div id="loading2" class="d-flex justify-content-center align-items-center vh-100">
+                  <div class="spinner-border text-primary" role="status">
+                    <span class="visually-hidden">Carregando...</span>
+                  </div>
+                </div>
+                  <!-- Produtos serão carregados dinamicamente aqui -->
+              </div>
+          </div>
+            
+            <div class="cart-footer" id="cart-footer" style="display: none;">
+              <div class="cart-footer-content">
+                  <span id="cart-count">0</span> itens no carrinho
+                  <i class="fas fa-shopping-cart fs-5"></i>
+                  <button class="btn btn-primary view-cart-btn">Ver Carrinho</button>
+              </div>
+          </div>
+    </div>
+
+<div class="whatsapp-button">
+   <a href="https://wa.me/" target="_blank" rel="noopener noreferrer">
+  <!-- Ícone SVG do WhatsApp -->
+  <img src="src/img/whatsappbutton.png" alt="whats">
+  </a>
+</div>
+
+<div class="instagram-button">
+ <a href="https://www.instagram.com/" target="_blank" rel="noopener noreferrer">
+  <img src="src/img/instagram.png" alt="insta">
+   </a>
+</div>
+
+ 
+
+</div>
+
+<footer class="footer">
+<div class="container">
+    <div class="footer-content">
+        <div class="footer-logo">
+            
+<img src="Imagens/logo.png" alt="LeCake" class="logo-header me-2" style="height: 60px;">
+
+
+<a href="index.html"><p style="color: white;">Cousa de Guapo, chê</p></a>
+           <div class="social-icons d-flex justify-content-center gap-4">
+<a href="https://www.instagram.com/jmollermachado" 
+ target="_blank" 
+ class="social-icon" 
+ style="font-size: 1rem; color: white;" 
+ title="Instagram">
+<i class="fab fa-instagram"></i>
+</a>
+
+<a href="https://wa.me/555185407492" 
+ target="_blank" 
+ class="social-icon" 
+ style="font-size: 1rem; color: white;" 
+ title="WhatsApp">
+<i class="fab fa-whatsapp"></i>
+</a>
+</div>
+        </div>
+        
+        
+    </div>
+    <div class="copyright">
+        &copy; 2025 Expressão do Gaudério - Todos os direitos reservados
+    </div>
+</div>
+</footer>
+
+
+<!-- Modal de Personalização -->
+<!-- Modal de Personalização -->
+<div class="modal fade" id="produtoModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog modal-lg">
+      <div class="modal-content">
+        <div class="modal-header">
+          <img src="Imagens/logo.png" alt="Cli" class="logo-header me-2" style="height: 50px;">
+         <h5 class="modal-title">Flor de Lótus</h5>
+          
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="row">
+            <div class="col-md-6 mb-1">
+              <img id="modalProdutoImagem" src="" class="img-fluid rounded" alt="">
+            </div>
+            <div class="col-md-6">
+              <h3 id="modalProdutoNome"></h3>
+              <p id="modalProdutoDescricao" class="text-muted"></p>
+              
+              
+              
+              <div class="d-flex justify-content-between align-items-center mb-3">
+                <h5 class="mb-0">Total:</h5>
+                <span class="h4 text-primary" id="modalProdutoTotal">R$ 0.00</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+          <button type="button" class="btn btn-primary" id="btnAdicionarPersonalizado">
+            Adicionar ao Carrinho
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+   
+    
+
+   <script type="module" src="src/auth.js"></script>
+    <script type="module" src="src/database.js"></script>
+    <script type="module" src="src/carrinho.js"></script>
+</body>
+</html>

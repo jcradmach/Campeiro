@@ -1,0 +1,870 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+   <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="/favicon.png" />
+    <title>Livraria do Gaudério - O melhor da Literatura Gaúcha, tchê</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link href="style.css" rel="stylesheet">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <link rel="manifest" href="/manifest.json">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Helvetica Neue', Arial, sans-serif;
+            line-height: 1.6;
+            color: #2d2d2d;
+            background: #fefefe;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        /* Header */
+        .header {
+            background: #fff;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            z-index: 1000;
+            padding: 1rem 0;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            border-bottom: 1px solid #f0f0f0;
+            transform: translateY(-100%);
+            animation: slideDown 0.8s ease-out 0.3s forwards;
+        }
+
+        @keyframes slideDown {
+            to { transform: translateY(0); }
+        }
+
+        .nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 300;
+            color: #2d2d2d;
+            letter-spacing: 2px;
+        }
+
+        .logo-header {
+
+            width: 100%; /* Ocupa 100% do container pai */
+            max-width: 90vh; /* Limita o tamanho máximo (opcional) */
+            height: auto; /* Mantém a proporção */
+        }
+        
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2.5rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #2d2d2d;
+            font-weight: 400;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            transition: all 0.3s ease;
+            text-transform: uppercase;
+        }
+
+        .nav-links a:hover {
+            color: #8b7355;
+        }
+
+ 
+
+
+/* Animações personalizadas */
+@keyframes typing {
+    from { width: 0 }
+    to { width: 100% }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: scale(0.9); }
+    to { opacity: 1; transform: scale(1); }
+}
+
+@keyframes slideIn {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+.typing-animation {
+    overflow: hidden;
+    white-space: nowrap;
+    animation: typing 1.5s steps(40, end) forwards;
+}
+
+.fade-in-animation {
+    animation: fadeIn 1.5s ease-out forwards;
+    animation-delay: 1s; /* Delay para começar após a primeira animação */
+}
+
+.slide-in-animation {
+    animation: slideIn 1s ease-out forwards;
+    animation-delay: 2s; /* Delay para começar após as outras animações */
+}
+
+        /* Hero Section */
+        .hero {
+            padding: 120px 0 80px;
+            text-align: center;
+             background-image: url('src/img/BG.png'); /* Caminho para sua imagem */
+    background-size: cover; /* Cobrir toda a área */
+    background-position: center; /* Centralizar a imagem */
+    background-repeat: no-repeat; /* Evitar repetição */
+      opacity: 0; /* Começa transparente */
+    animation: fadeIn 3.5s ease-in-out forwards; /* Animação de 1.5s */
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+    }
+    to {
+        opacity: 1;
+    }
+}
+
+      
+
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .hero .h1 {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 2s ease-out 0.8s forwards;
+        }
+
+        .hero .subtitle {
+            font-size: 1.3rem;
+            color: #8b7355;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            width: 0;
+            animation: typing 2s ease-out 1s forwards;
+        }
+
+         .hero .subtitle2 {
+            font-size: 1.3rem;
+            color: #8b7355;
+            font-weight: 300;
+            letter-spacing: 1px;
+            margin-bottom: 0.5rem;
+            width: 0;
+            animation: typing 3s ease-out 1s forwards;
+        }
+
+        .hero .tagline {
+            font-size: 1.1rem;
+            color: #666;
+            font-weight: 300;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        /* Section Animations */
+        .section {
+            padding: 80px 0;
+            opacity: 0;
+            transform: translateY(40px);
+            transition: all 0.8s ease;
+        }
+
+        .section.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            font-weight: 200;
+            text-align: center;
+            margin-bottom: 3rem;
+            color: #2d2d2d;
+            letter-spacing: 2px;
+        }
+
+        /* Blog Grid */
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+            margin-top: 2rem;
+        }
+
+        .blog-card {
+            background: #fff;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            transition: all 0.4s ease;
+            transform: translateY(30px);
+            opacity: 0;
+            border: 1px solid #f5f5f5;
+        }
+
+        .blog-card.animate {
+            transform: translateY(0);
+            opacity: 1;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 12px 40px rgba(0,0,0,0.12);
+        }
+
+        .blog-card-image {
+            width: 100%;
+            height: 240px;
+            background: linear-gradient(135deg, #f0f0f0, #e0e0e0);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .blog-card-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.4s ease;
+        }
+
+        .blog-card:hover .blog-card-image img {
+            transform: scale(1.05);
+        }
+
+        .blog-card-content {
+            padding: 2rem;
+        }
+
+        .blog-card h3 {
+            font-size: 1.4rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+            letter-spacing: 0.5px;
+        }
+
+        .blog-card p {
+            color: #666;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 0.85rem;
+            color: #999;
+            border-top: 1px solid #f0f0f0;
+            padding-top: 1rem;
+        }
+
+        .read-more {
+            color: #8b7355;
+            text-decoration: none;
+            font-weight: 500;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            transition: all 0.3s ease;
+        }
+
+        .read-more:hover {
+            color: #2d2d2d;
+        }
+
+        .read-more::after {
+            content: ' →';
+            transition: transform 0.3s ease;
+        }
+
+        .read-more:hover::after {
+            transform: translateX(3px);
+        }
+
+        /* Create Post Section */
+        .create-section {
+            background: #f8f6f3;
+            padding: 80px 0;
+        }
+
+        .editor-form {
+            background: #fff;
+            border-radius: 12px;
+            padding: 3rem;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.06);
+            border: 1px solid #f0f0f0;
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .form-group {
+            margin-bottom: 2rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            font-weight: 400;
+            color: #2d2d2d;
+            font-size: 0.95rem;
+            letter-spacing: 0.5px;
+            text-transform: uppercase;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1.2rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 6px;
+            font-size: 1rem;
+            font-family: inherit;
+            transition: all 0.3s ease;
+            background: #fafafa;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #8b7355;
+            background: #fff;
+            box-shadow: 0 0 20px rgba(139, 115, 85, 0.1);
+        }
+
+        .form-group textarea {
+            height: 200px;
+            resize: vertical;
+        }
+
+        .btn-primary {
+            background: #2d2d2d;
+            color: white;
+            padding: 1rem 2.5rem;
+            border: none;
+            border-radius: 6px;
+            font-size: 0.9rem;
+            font-weight: 400;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+        }
+
+        .btn-primary:hover {
+            background: #8b7355;
+            transform: translateY(-2px);
+        }
+
+        /* Categories */
+        .categories {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-bottom: 3rem;
+            justify-content: center;
+        }
+
+        .category-tag {
+            padding: 0.5rem 1.2rem;
+            background: #f8f6f3;
+            border: 1px solid #e0e0e0;
+            border-radius: 25px;
+            font-size: 0.85rem;
+            color: #666;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            letter-spacing: 0.5px;
+        }
+
+        .category-tag:hover,
+        .category-tag.active {
+            background: #8b7355;
+            color: white;
+            border-color: #8b7355;
+        }
+
+        /* Loading animation */
+        .loading {
+            text-align: center;
+            padding: 2rem;
+            color: #999;
+        }
+
+        .loading::after {
+            content: '...';
+            animation: dots 1.5s infinite;
+        }
+
+        @keyframes dots {
+            0%, 20% { content: '.'; }
+            40% { content: '..'; }
+            60%, 100% { content: '...'; }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+                letter-spacing: 1px;
+            }
+            
+            .hero .subtitle {
+                font-size: 1.1rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .blog-grid {
+                grid-template-columns: 1fr;
+                gap: 2rem;
+            }
+
+            .blog-card-content {
+                padding: 1.5rem;
+            }
+
+            .categories {
+                justify-content: flex-start;
+                overflow-x: auto;
+                padding-bottom: 0.5rem;
+            }
+        }
+
+        /* Smooth scroll indicator */
+        .scroll-indicator {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 3px;
+            background: rgba(139, 115, 85, 0.2);
+            z-index: 1001;
+        }
+
+        .scroll-progress {
+            height: 100%;
+            background: #8b7355;
+            width: 0%;
+            transition: width 0.1s ease;
+        }
+    </style>
+</head>
+<body>
+    <!-- Scroll Progress -->
+    <div class="scroll-indicator">
+        <div class="scroll-progress" id="scrollProgress"></div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <nav class="nav container">
+             <a class="navbar-brand d-flex align-items-center" href="catalogo.html">
+        <img src="src/img/LeCake Logo Marrom.png" alt="Gauderio" class="logo-header me-2" style="height: 30px;">
+        <span class="d-sm-inline">Expressão do Gaudério</span>
+      </a>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#artigos">Artigos</a></li>
+                <li><a href="#criar">Escrever</a></li>
+                <li><a href="#sobre">Sobre</a></li>
+                <li><a href="config.html">Gerencial</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+<section id="home" class="hero">
+    <div class="hero-content container d-flex flex-column align-items-center">
+        <!-- Imagem "BEM VINDO" com animação de digitação -->
+        <div class="subtitle">
+            <img src="src/img/BEM VINDO.png" alt="Bem Vindo" class="logo-header2"  style="width: 100%; max-width: 70vh; height: auto;">
+        </div>
+        
+        <div class="h1">
+        <img src="src/img/gaudsbg.png" alt="Gaudério" class="logo-header" style="width: 100%; max-width: 90vh; height: auto;">
+        </div>
+        <!-- Imagem "MELHOR DA" com animação de deslizar -->
+        <div class="subtitle2">
+            <img src="src/img/MELHORDA.png" alt="Melhor da Cultura" class="logo-header2"  style="width: 100%; max-width: 70vh; height: auto;">
+        </div>
+    </div>
+</section>
+
+      <!-- About Section -->
+    <section id="about">
+        <h2 class="section-title">Sobre Nós</h2>
+        <div class="about-content">
+            <div class="about-text">
+        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl.</p>
+        
+        <p>Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia curae; Donec euismod, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt.</p>
+        
+        <p>Curabitur auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl. Nullam auctor, nisl eget ultricies tincidunt, nisl nisl aliquam nisl, eget ultricies nisl nisl eget nisl.</p>
+            </div>
+            <div class="about-image">
+                <img src="src/img/LeCake Logo Marrom.png" alt="exp">
+            </div>
+        </div>
+    </section>
+
+    <!-- Articles Section -->
+    <section id="artigos" class="section">
+        <div class="container">
+            <h2 class="section-title">Artigos Recentes</h2>
+            
+            <!-- Categories -->
+           <div class="categories">
+    <a href="#" class="category-tag active" data-category="all">Todos</a>
+    <a href="#" class="category-tag" data-category="politics">Política</a>
+    <a href="#" class="category-tag" data-category="health">Saúde</a>
+    <a href="#" class="category-tag" data-category="opinion">Opinião</a>
+    <a href="#" class="category-tag" data-category="culture">Cultura</a>
+    <a href="#" class="category-tag" data-category="traditions">Tradições</a>
+</div>
+
+<div class="blog-grid" id="blogGrid">
+    <!-- Artigo 1 - Cultura -->
+    <article class="blog-card" data-category="culture">
+        <div class="blog-card-image">
+            <img src="src/img/musica.jpg" alt="Gaúchos tocando música tradicional" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>A Origem da Música Gaúcha</h3>
+            <p>Explore as raízes da música tradicional gaúcha, dos payadores às milongas, e sua evolução até os dias atuais.</p>
+            <div class="blog-card-meta">
+                <span>01 Jun 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Artigo 2 - Tradições -->
+    <article class="blog-card" data-category="traditions">
+        <div class="blog-card-image">
+            <img src="src/img/churrasco.jpg" alt="Churrasco tradicional gaúcho" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>A Arte do Churrasco Gaúcho</h3>
+            <p>Descubra os segredos do autêntico churrasco campeiro, desde o corte da carne até as técnicas de preparo.</p>
+            <div class="blog-card-meta">
+                <span>30 Mai 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Artigo 3 - Saúde -->
+    <article class="blog-card" data-category="health">
+        <div class="blog-card-image">
+            <img src="src/img/chima.jpg" alt="Chimarrão e erva-mate" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>Benefícios do Chimarrão para a Saúde</h3>
+            <p>Conheça os benefícios da erva-mate para o organismo e por que o chimarrão é mais que uma tradição.</p>
+            <div class="blog-card-meta">
+                <span>28 Mai 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Artigo 4 - Política -->
+    <article class="blog-card" data-category="politics">
+        <div class="blog-card-image">
+            <img src="src/img/gaucho-politics.jpg" alt="Reunião de lideranças gaúchas" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>O Movimento Tradicionalista na Política</h3>
+            <p>Como as tradições gaúchas influenciam as decisões políticas na região sul do Brasil.</p>
+            <div class="blog-card-meta">
+                <span>25 Mai 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Artigo 5 - Opinião -->
+    <article class="blog-card" data-category="opinion">
+        <div class="blog-card-image">
+            <img src="src/img/pampa.jpg" alt="Paisagem do Pampa" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>Preservando o Pampa Gaúcho</h3>
+            <p>Um olhar sobre os desafios de conservação do bioma pampa e sua importância cultural.</p>
+            <div class="blog-card-meta">
+                <span>22 Mai 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+
+    <!-- Artigo 6 - Tradições -->
+    <article class="blog-card" data-category="traditions">
+        <div class="blog-card-image">
+            <img src="src/img/prendas.jpg" alt="Prendas e peões" style="width: 100%; height: 100%; object-fit: cover;">
+        </div>
+        <div class="blog-card-content">
+            <h3>O Significado das Prendas e Peões</h3>
+            <p>Entenda o papel das prendas e peões na cultura gaúcha e sua representação nas festividades tradicionais.</p>
+            <div class="blog-card-meta">
+                <span>20 Mai 2025</span>
+                <a href="#" class="read-more">Ler Mais</a>
+            </div>
+        </div>
+    </article>
+</div>
+        </div>
+    </section>
+
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-logo">
+                    
+        <img src="src/img/LeCake Logo Marrom.png" alt="LeCake" class="logo-header me-2" style="width: 100%; max-width: 10vh; height: auto;">
+     
+      
+                    <p>O melhor da Literatura Gaúcha.</p>
+                    <div class="social-icons">
+                        <a href="#" class="social-icon"><i class="fab fa-facebook-f"></i></a>
+                        <a href="https://www.instagram.com/aveclecake" class="social-icon"><i class="fab fa-instagram"></i></a>
+                        <a href="https://wa.me/555193833989" class="social-icon"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div class="copyright">
+                &copy; 2025 Livraria do Gaudério - Todos os direitos reservados
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Scroll progress indicator
+        window.addEventListener('scroll', () => {
+            const scrollTop = window.pageYOffset;
+            const docHeight = document.body.scrollHeight - window.innerHeight;
+            const scrollPercent = (scrollTop / docHeight) * 100;
+            document.getElementById('scrollProgress').style.width = scrollPercent + '%';
+        });
+
+        // Intersection Observer for animations
+        const observerOptions = {
+            threshold: 0.2,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('active');
+                    
+                    // Animate blog cards
+                    const cards = entry.target.querySelectorAll('.blog-card');
+                    cards.forEach((card, index) => {
+                        setTimeout(() => {
+                            card.classList.add('animate');
+                        }, index * 150);
+                    });
+                }
+            });
+        }, observerOptions);
+
+        // Observe sections
+        document.querySelectorAll('.section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Smooth scrolling
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Category filtering
+        const categoryTags = document.querySelectorAll('.category-tag');
+        const blogCards = document.querySelectorAll('.blog-card');
+
+        categoryTags.forEach(tag => {
+            tag.addEventListener('click', (e) => {
+                e.preventDefault();
+                
+                // Update active category
+                categoryTags.forEach(t => t.classList.remove('active'));
+                tag.classList.add('active');
+                
+                const category = tag.dataset.category;
+                
+                // Filter cards
+                blogCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                        setTimeout(() => {
+                            card.classList.add('animate');
+                        }, 100);
+                    } else {
+                        card.style.display = 'none';
+                        card.classList.remove('animate');
+                    }
+                });
+            });
+        });
+
+        // Article creation
+        let articles = [];
+
+        function createArticleEmoji(category) {
+            const emojis = {
+                wellness: '💫',
+                nutrition: '🥬',
+                lifestyle: '🌿',
+                beauty: '✨'
+            };
+            return emojis[category] || '📝';
+        }
+
+        function createArticleGradient(category) {
+            const gradients = {
+                wellness: 'linear-gradient(135deg, #fce4ec 0%, #f8bbd9 100%)',
+                nutrition: 'linear-gradient(135deg, #e8f5e8 0%, #c8e6c9 100%)',
+                lifestyle: 'linear-gradient(135deg, #e3f2fd 0%, #90caf9 100%)',
+                beauty: 'linear-gradient(135deg, #f3e5f5 0%, #ce93d8 100%)'
+            };
+            return gradients[category] || 'linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%)';
+        }
+
+        function createArticleCard(article) {
+            const emoji = createArticleEmoji(article.category);
+            const gradient = createArticleGradient(article.category);
+            
+            return `
+                <article class="blog-card" data-category="${article.category}">
+                    <div class="blog-card-image">
+                        <div style="width: 100%; height: 100%; background: ${gradient}; display: flex; align-items: center; justify-content: center; color: #666; font-size: 3rem;">${emoji}</div>
+                    </div>
+                    <div class="blog-card-content">
+                        <h3>${article.title}</h3>
+                        <p>${article.content}</p>
+                        <div class="blog-card-meta">
+                            <span>${article.date}</span>
+                            <a href="#" class="read-more">Read More</a>
+                        </div>
+                    </div>
+                </article>
+            `;
+        }
+
+        function addArticle(title, category, content) {
+            const article = {
+                id: Date.now(),
+                title: title,
+                category: category,
+                content: content,
+                date: new Date().toLocaleDateString('pt-BR', { 
+                    day: '2-digit', 
+                    month: 'short', 
+                    year: 'numeric' 
+                })
+            };
+            
+            articles.unshift(article);
+            
+            // Add to grid
+            const blogGrid = document.getElementById('blogGrid');
+            const articleHTML = createArticleCard(article);
+            blogGrid.insertAdjacentHTML('afterbegin', articleHTML);
+            
+            // Animate new card
+            const newCard = blogGrid.querySelector('.blog-card:first-child');
+            setTimeout(() => {
+                newCard.classList.add('animate');
+            }, 100);
+            
+            // Scroll to articles
+            document.querySelector('#artigos').scrollIntoView({
+                behavior: 'smooth'
+            });
+        }
+
+        // Form submission
+        document.getElementById('articleForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const title = document.getElementById('articleTitle').value.trim();
+            const category = document.getElementById('articleCategory').value;
+            const content = document.getElementById('articleContent').value.trim();
+            
+            if (title && content) {
+                addArticle(title, category, content);
+                
+                // Clear form
+                this.reset();
+                
+                // Success feedback
+                const btn = this.querySelector('.btn-primary');
+                const originalText = btn.textContent;
+                btn.textContent = 'Artigo Publicado!';
+                btn.style.background = '#4caf50';
+                
+                setTimeout(() => {
+                    btn.textContent = originalText;
+                    btn.style.background = '#2d2d2d';
+                }, 2000);
+            }
+        });
+
+        // Initial animation for existing cards
+        setTimeout(() => {
+            document.querySelectorAll('.blog-card').forEach((card, index) => {
+                setTimeout(() => {
+                    card.classList.add('animate');
+                }, index * 150);
+            });
+        }, 1000);
+    </script>
+</body>
+</html>

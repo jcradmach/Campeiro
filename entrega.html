@@ -1,0 +1,461 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+     <title>Expressão do Gaudério</title>
+    <link rel="icon" type="image/png" href="favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.0/font/bootstrap-icons.css">
+    <link href="css/style3.css" rel="stylesheet">
+    <link rel="manifest" href="/manifest.json">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+</head>
+<body>
+
+<div class="mainscreen">
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+<div class="container-fluid">
+    <!-- Mobile: Primeira linha - Logo + Carrinho + Toggle -->
+    <div class="d-flex w-100 justify-content-between align-items-center d-lg-none">
+        <!-- Logo -->
+        <a class="navbar-brand d-flex align-items-center" href="catalogo.html">
+            <img src="Imagens/logo.png" alt="logo" class="logo-header me-2">
+            <span>Voltar para o Site</span>
+        </a>
+        
+    
+    </div>
+    
+    <!-- Desktop: Logo (esquerda) -->
+    <a class="navbar-brand d-none d-lg-flex align-items-center" href="catalogo.html">
+        <img src="Imagens/logo.png" alt="logo" class="logo-header me-2">
+        <span>Voltar para o Site</span>
+    </a>
+    
+</div>
+
+</nav>
+    <div class="container mt-5">
+        <div class="row justify-content-center">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3 class="text-center">Informações de Entrega</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="entrega-form">
+                            <!-- Tipo de Entrega -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Tipo de Entrega</h5>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoEntrega" id="retirada" value="retirada" checked>
+                                    <label class="form-check-label" for="retirada">
+                                        Retirada no Local
+                                    </label>
+                                </div>
+                                <div class="form-check">
+                                    <input class="form-check-input" type="radio" name="tipoEntrega" id="entrega" value="entrega">
+                                    <label class="form-check-label" for="entrega">
+                                        Entrega
+                                    </label>
+                                </div>
+                            </div>
+    
+    
+                            
+    
+                            <!-- Opções de Entrega (mostrado apenas quando "Entrega" for selecionado) -->
+                            <div id="entrega-options" style="display: none;">
+                            
+                                <!-- Seleção de Endereço -->
+                                <div class="mb-4">
+                                    <h5 class="mb-3">Endereço de Entrega</h5>
+                                    <div id="enderecos-container" class="mb-3">
+                                        <div class="text-center">
+                                            <div class="spinner-border text-primary" role="status">
+                                                <span class="visually-hidden">Carregando...</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="btn btn-outline-primary w-100" data-bs-toggle="modal" data-bs-target="#endereco-modal">
+                                        <i class="bi bi-plus"></i> Adicionar Novo Endereço
+                                    </button>
+                                </div>
+                            </div>
+    
+                            <!-- Campo de Cupom -->
+                            <div class="mb-3">
+                                <h5 class="mb-3">Cupom de Desconto</h5>
+                                <div class="input-group mb-3">
+                                    <input type="text" class="form-control" id="cupom-input" placeholder="Digite seu cupom">
+                                    <button class="btn btn-outline-secondary" type="button" id="aplicar-cupom">Aplicar</button>
+                                </div>
+                                <div id="cupom-message" class="text-small"></div>
+                            </div>
+    
+                            <!-- Resumo do Pedido -->
+                            <div class="mb-4">
+                                <h5 class="mb-3">Resumo do Pedido</h5>
+                                <div class="card">
+                                    <div class="card-body">
+                                        <div id="resumo-pedido">
+                                            <!-- Itens do carrinho serão carregados aqui via JavaScript -->
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between">
+                                            <strong>Subtotal:</strong>
+                                            <span id="subtotall">R$ 0,00</span>
+                                        </div>
+                                        <div class="d-flex justify-content-between" id="taxa-entrega-container" style="display: none;">
+                                            <strong>Taxa de Entrega:</strong>
+                                            <span id="taxa-entrega">R$ 0,00</span>
+                                        </div>
+                                        <div id="desconto-container" class="d-flex justify-content-between" style="display: none;">
+                                            <strong>Desconto:</strong>
+                                            <span id="desconto-valor">-R$ 0,00</span>
+                                        </div>
+                                        <hr>
+                                        <div class="d-flex justify-content-between">
+                                            <strong>Total:</strong>
+                                            <span id="total" class="fw-bold">R$ 0,00</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+    
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary btn-lg">Continuar para Pagamento</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+    <!-- Modal para Adicionar Endereço -->
+    <div class="modal fade" id="endereco-modal" tabindex="-1" aria-labelledby="endereco-modal-label" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="endereco-modal-label">Adicionar Endereço</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="form-endereco">
+                        <div class="mb-3">
+                            <label for="cep" class="form-label">CEP</label>
+                            <div class="input-group">
+                                <input type="text" class="form-control" id="cep" required>
+                                <button class="btn btn-outline-secondary" type="button" id="buscar-cep">
+                                    <i class="bi bi-search"></i> Buscar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3">
+                            <label for="rua" class="form-label">Rua</label>
+                            <input type="text" class="form-control" id="rua" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="numero" class="form-label">Número</label>
+                            <input type="text" class="form-control" id="numero" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="complemento" class="form-label">Complemento (opcional)</label>
+                            <input type="text" class="form-control" id="complemento">
+                        </div>
+                        <div class="mb-3">
+                            <label for="bairro" class="form-label">Bairro</label>
+                            <input type="text" class="form-control" id="bairro" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="cidade" class="form-label">Cidade</label>
+                            <input type="text" class="form-control" id="cidade" required>
+                        </div>
+
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+                            <button type="submit" class="btn btn-primary" id="salvar-endereco">Salvar Endereço</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="pixModal" tabindex="-1" data-bs-backdrop="static">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header bg-primary text-white">
+                    <h5 class="modal-title">
+                        <i class="fas fa-qrcode me-2"></i>Pagamento via PIX
+                    </h5>
+                    <button type="button" class="btn-close btn-close-white" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body text-center">
+                    <div class="p-3">
+                        <h4 class="mb-3">Pedido #<span id="pedidoId"></span></h4>
+                        <div class="d-flex justify-content-center mb-3">
+                            <div class="badge bg-success fs-6 p-2">
+                                Valor: R$ <span id="pixValor"></span>
+                            </div>
+                        </div>
+                        
+                        <div id="qrCodeContainer" class="my-4 mx-auto" style="max-width: 300px;">
+                            <!-- QR Code será inserido aqui -->
+                        </div>
+                        
+                        <div class="alert alert-primary d-flex align-items-center">
+                            <i class="fas fa-info-circle me-2 fs-4"></i>
+                            <div>
+                                Escaneie o QR Code com seu app bancário<br>
+                                <small class="text-muted">Validade: <span id="pixTimer">05:00</span></small>
+                            </div>
+                        </div>
+                        
+                        <div class="d-grid gap-2">
+                            <button id="copyPixBtn" class="btn btn-outline-primary">
+                                <i class="fas fa-copy me-2"></i>Copiar Código PIX
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <div id="paymentStatus" class="w-100 text-center">
+                        <div class="spinner-border text-primary" role="status" id="paymentSpinner">
+                            <span class="visually-hidden">Aguardando pagamento...</span>
+                        </div>
+                        <p class="mt-2 mb-0">Aguardando confirmação do pagamento...</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    
+   
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script type="module" src="src/database.js"></script>
+    <script type="module" src="src/carrinho.js"></script>
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+
+    
+<script type="module">
+    import { finalizarPedido } from '/src/database.js';
+    import { salvarEndereco, carregarEnderecos, atualizarTotal } from '/src/carrinho.js'
+    
+    document.addEventListener('DOMContentLoaded', () => {
+    document.getElementById('entrega-form').addEventListener('submit', async function(e) {
+        e.preventDefault();
+        
+        // Inicializar o objeto dadosEntrega
+        const dadosEntrega = {
+            tipo: document.querySelector('input[name="tipoEntrega"]:checked').value,
+            data: null,
+            horario: null,
+            endereco: null,
+            taxa: null,
+            subtotal: null,
+            cupom: null
+        };
+
+        // Coletar dados do formulário
+        
+        
+        const taxaText = document.getElementById('taxa-entrega').textContent;
+        const taxa = parseFloat(taxaText.replace('R$ ', '').replace(',', '.'));
+        const subtotalText = document.getElementById('subtotall').textContent;
+        const subtotal = parseFloat(subtotalText.replace('R$ ', '').replace(',', '.'));
+        const cupom = document.getElementById('cupom-input').value;
+        
+       
+      
+
+        // Preencher dados básicos que são sempre enviados
+       
+        dadosEntrega.taxa = taxa;
+        dadosEntrega.subtotal = subtotal;
+        dadosEntrega.cupom = cupom;
+
+        // Se for entrega, validar e adicionar endereço
+        if (dadosEntrega.tipo === 'entrega') {
+            const enderecoSelecionado = document.querySelector('input[name="endereco"]:checked');
+            
+            if (!enderecoSelecionado) {
+                Swal.fire('Atenção', 'Por favor, selecione um endereço de entrega', 'warning');
+                return;
+            }
+
+            // Verificação adicional para garantir que o endereço existe
+            try {
+                const enderecos = await carregarEnderecos();
+                if (!enderecos || !enderecos[enderecoSelecionado.value]) {
+                    Swal.fire('Erro', 'O endereço selecionado é inválido', 'error');
+                    return;
+                }
+                
+                // Adicionar dados do endereço
+                const enderecoId = enderecoSelecionado.value;
+                dadosEntrega.endereco = {
+                    id: enderecoId,
+                    ...enderecos[enderecoId]
+                };
+            } catch (error) {
+                Swal.fire('Erro', 'Não foi possível verificar o endereço', 'error');
+                return;
+            }
+        }
+
+        // Mostrar loading
+        const btnSubmit = e.target.querySelector('button[type="submit"]');
+        const originalText = btnSubmit.innerHTML;
+        btnSubmit.innerHTML = '<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Processando...';
+        btnSubmit.disabled = true;
+
+        try {
+            await finalizarPedido(dadosEntrega);
+        } catch (error) {
+            console.error('Erro:', error);
+            // O erro já foi tratado na função finalizarPedido
+        } finally {
+            // Restaurar botão
+            btnSubmit.innerHTML = originalText;
+            btnSubmit.disabled = false;
+        }
+    });
+});
+</script>
+
+<script type="module">
+        import { salvarEndereco, carregarEnderecos, atualizarTotal } from '/src/carrinho.js';
+        
+        document.getElementById('form-endereco').addEventListener('submit', async (e) => {
+    e.preventDefault(); // Impede o comportamento padrão de submit
+    
+    const enderecoData = {
+        cep: document.getElementById('cep').value,
+        rua: document.getElementById('rua').value,
+        numero: document.getElementById('numero').value,
+        complemento: document.getElementById('complemento').value,
+        bairro: document.getElementById('bairro').value,
+        cidade: document.getElementById('cidade').value
+    };
+    
+    try {
+        await salvarEndereco(enderecoData);
+        Swal.fire({
+            title: 'Sucesso!',
+            text: 'Endereço salvo com sucesso',
+            icon: 'success',
+            timer: 2000,
+            showConfirmButton: false
+        });
+        
+        // Recarregar a lista de endereços
+        const enderecos = await carregarEnderecos();
+        atualizarListaEnderecos(enderecos);
+        
+        // Fechar o modal
+        const modal = bootstrap.Modal.getInstance(document.getElementById('endereco-modal'));
+        if (modal) modal.hide();
+        
+        // Limpar formulário (opcional)
+        document.getElementById('form-endereco').reset();
+        
+    } catch (error) {
+        console.error('Erro ao salvar endereço:', error);
+        Swal.fire({
+            title: 'Erro!',
+            text: 'Não foi possível salvar o endereço',
+            icon: 'error'
+        });
+    }
+});
+
+// Função para atualizar a lista de endereços na UI (mantida igual)
+function atualizarListaEnderecos(enderecos) {
+    const container = document.getElementById('enderecos-container');
+    container.innerHTML = '';
+    
+    if (!enderecos || Object.keys(enderecos).length === 0) {
+        container.innerHTML = '<div class="alert alert-warning">Nenhum endereço cadastrado</div>';
+        document.getElementById('taxa-entrega-container').style.display = 'none';
+        return;
+    }
+    
+    let html = '<div class="list-group">';
+    for (const [id, endereco] of Object.entries(enderecos)) {
+        html += `
+            <label class="list-group-item d-flex align-items-center">
+                <input type="radio" name="endereco" value="${id}" 
+                       class="form-check-input me-2 endereco-radio" 
+                       data-bairro="${endereco.bairro.toLowerCase()}"
+                       ${id === Object.keys(enderecos)[0] ? 'checked' : ''}>
+                <div>
+                    <strong>${endereco.rua}, ${endereco.numero}</strong><br>
+                    ${endereco.bairro}, ${endereco.cidade}
+                    ${endereco.complemento ? '<div class="text-muted small">' + endereco.complemento + '</div>' : ''}
+                </div>
+            </label>
+        `;
+    }
+    html += '</div>';
+    container.innerHTML = html;
+    
+    // Adiciona eventos aos radios
+    document.querySelectorAll('.endereco-radio').forEach(radio => {
+        radio.addEventListener('change', function() {
+            if (this.checked) {
+                atualizarTaxaEntrega(this.getAttribute('data-bairro'));
+                atualizarTotal();
+            }
+        });
+    });
+    
+    // Dispara o evento change no primeiro endereço (se existir)
+    const primeiroRadio = container.querySelector('.endereco-radio');
+    if (primeiroRadio) {
+        primeiroRadio.dispatchEvent(new Event('change'));
+    }
+}
+       
+       
+
+// Função para calcular e atualizar a taxa de entrega
+function atualizarTaxaEntrega(bairro) {
+    const taxaContainer = document.getElementById('taxa-entrega-container');
+    const taxaElement = document.getElementById('taxa-entrega');
+    
+    const bairrosComTaxaReduzida = ["centenário", "imigrante", "olarias"];
+    const taxa = bairrosComTaxaReduzida.includes(bairro) ? 5.00 : 10.00;
+    
+    taxaElement.textContent = `R$ ${taxa.toFixed(2).replace('.', ',')}`;
+    taxaContainer.style.display = 'flex';
+    
+    // Retorna o valor numérico para uso em outros cálculos se necessário
+    return taxa;
+}
+        document.querySelectorAll('input[name="tipoEntrega"]').forEach(radio => {
+            radio.addEventListener('change', async () => {
+
+                try {
+                const enderecos = await carregarEnderecos();
+                atualizarListaEnderecos(enderecos);
+            } catch (error) {
+                Swal.fire('Erro!', 'Não foi possível salvar carregar', 'error');
+            }
+       
+            });
+        });
+
+        
+
+</script>
+
+
+</body>
+</html>

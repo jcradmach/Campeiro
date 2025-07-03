@@ -1,0 +1,461 @@
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #f8f9fa;
+}
+
+/* Animação para os pontos */
+.loading-dots::after {
+    content: '...';
+    animation: dots 1.5s steps(5, end) infinite;
+    display: inline-block;
+    width: 20px;
+    overflow: hidden;
+    vertical-align: bottom;
+}
+
+@keyframes dots {
+    0%, 20% { content: '.'; }
+    40% { content: '..'; }
+    60%, 100% { content: '...'; }
+}
+
+/* Cores personalizadas para o spinner */
+.text-primary {
+    color: #0d6efd !important;
+}
+
+.mainscreen {
+    display: block;
+    padding: 0.2rem;
+    width: 100%;
+}
+
+.page-container {
+    margin-top: 5rem;
+    display: block;
+}
+
+.card {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.card-img-top {
+    position: relative;
+    width: 100%;
+    height: 50%;
+    overflow: hidden;
+    border-radius: 1rem; /* Mantém o rounded-2xl do seu código */
+    object-fit: contain; /* Mantém a proporção sem cortar */
+    object-position: center;
+
+}
+
+.card-img-top .img {
+
+position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: contain; /* Mantém a proporção sem cortar */
+  object-position: center;
+  border-radius: 1rem; /* Mantém o rounded-2xl do seu código */
+
+}
+
+.navbar {
+    position: fixed;
+    width: 100%;
+    top: 0;
+    left: 0;
+    display: block;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+/* Carrossel Responsivo */
+.carousel {
+    transition: transform 0.3s, box-shadow 0.3s;
+    border: none;
+    border-radius: 10px;
+    overflow: hidden;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    display: flex;
+    flex-direction: column;
+    height: 30vh;
+    justify-content: center;
+   
+}
+
+.carousel-inner {
+   position: relative;
+  
+   
+}
+
+.carousel-item {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 1rem; /* Mantém o rounded-2xl do seu código */
+    object-fit: contain; /* Mantém a proporção sem cortar */
+    object-position: center;
+}
+
+.carousel-item img {
+ 
+   
+    width: 100%;
+    height: 100%;
+    object-fit: contain; /* Mantém a proporção sem cortar */
+    object-position: center;
+    border-radius: 1rem; 
+    
+}
+
+.carousel-button {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    color: white;
+    padding: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    z-index: 10;
+}
+
+.carousel-button:hover {
+    background-color: rgba(0, 0, 0, 0.8);
+}
+
+.carousel-button.prev {
+    left: 10px;
+}
+
+.carousel-button.next {
+    right: 10px;
+}
+
+.btn-outline-light {
+
+    margin-left: 5px;
+    margin-right: 5px;
+    margin-bottom: 5px;
+}
+
+.btn-primary {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.btn-primary:hover {
+    background-color: #5a32a3;
+    border-color: #5a32a3;
+}
+
+.btn-outline-primary {
+    color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+.btn-outline-primary:hover {
+    background-color: #6f42c1;
+    border-color: #6f42c1;
+}
+
+
+.bg-primary {
+    background-color: #6f42c1 !important;
+}
+
+.text-primary {
+    color: #6f42c1 !important;
+}
+
+.carrinho-item {
+    transition: background-color 0.3s;
+    padding: 10px;
+    border-radius: 5px;
+}
+
+.carrinho-item:hover {
+    background-color: #f8f9fa;
+}
+
+.quantidade-input {
+    max-width: 60px;
+}
+
+#carrinho-vazio {
+    display: none;
+}
+
+#carrinho-vazio.d-none {
+    display: flex !important;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Estilo para a página de login */
+.login-container {
+    max-width: 400px;
+    margin: 0 auto;
+    padding-top: 50px;
+}
+
+.card-login {
+    border: none;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.card-login .card-header {
+    border-radius: 10px 10px 0 0 !important;
+}
+
+.produtos-container {
+
+display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1.5rem;
+  width: 100%;
+
+}
+
+.btn-group {
+
+    display: block;
+}
+
+.bg-blue {
+    background-color: #0d6efd; /* ou qualquer tom de azul que preferir */
+}
+
+.card-fade-in {
+    opacity: 0;
+    transform: translateY(20px);
+    animation: fadeInUp 0.5s ease forwards;
+  }
+  
+  @keyframes fadeInUp {
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+/* Ajustes para diferentes tamanhos de tela */
+@media (max-width: 300px) {
+    .produtos-container {
+      grid-template-columns: repeat(2, 1fr); /* 2 cards por linha em telas pequenas */
+    }
+  }
+
+  /* Ajustes para diferentes tamanhos de tela */
+@media (min-width: 1000px) {
+    .carousel {
+        transition: transform 0.3s, box-shadow 0.3s;
+        border: none;
+        border-radius: 10px;
+       
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: none;
+        flex-direction: column;
+        height: 50vh;
+        justify-content: center;
+    }
+
+    .carousel-item {
+        position: relative;
+        
+        
+        border-radius: 1rem; /* Mantém o rounded-2xl do seu código */
+        object-fit: fill; /* Mantém a proporção sem cortar */
+        object-position: center;
+    }
+    
+    .carousel-item img {
+     
+        height: 100%;
+        object-fit:fill; /* Mantém a proporção sem cortar */
+        object-position: center;
+        border-radius: 1rem; 
+        
+    }
+  }
+
+  /* Estilos para o modal e botões */
+.produto-card {
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.produto-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+}
+
+.tamanho-btn.active, .cobertura-btn.active {
+    background-color: #6f42c1;
+    color: white;
+    border-color: #6f42c1;
+}
+
+#wallet_container {
+    max-width: 600px;
+    margin: 20px auto;
+  }
+  
+  .payment-feedback {
+    display: none;
+    padding: 20px;
+    border-radius: 5px;
+    margin: 20px 0;
+    text-align: center;
+  }
+  
+  .payment-success {
+    background-color: #d4edda;
+    color: #155724;
+  }
+  
+  .payment-error {
+    background-color: #f8d7da;
+    color: #721c24;
+  }
+  
+  .payment-pending {
+    background-color: #fff3cd;
+    color: #856404;
+  }
+
+  .toast {
+    min-width: 250px;
+    text-align: center;
+  }
+
+  .logo-header {
+    height: 40px;
+    /* outros estilos se necessário */
+  }
+  
+  .user-card { cursor: pointer; }
+  #filtros button.active { font-weight: bold; }
+
+   /* Rodapé */
+        .footer {
+            background-color: #5a32a3;
+            color: #fff;
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            display: flex;
+            justify-content: space-between;
+            flex-wrap: wrap;
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+        
+        .footer-logo {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-logo h2 {
+            font-size: 28px;
+            margin-bottom: 15px;
+            color: #ff6b6b;
+        }
+        
+        .footer-logo p {
+            font-size: 16px;
+            line-height: 1.6;
+        }
+        
+        .footer-links {
+            flex: 1;
+            min-width: 200px;
+        }
+        
+        .footer-links h3 {
+            font-size: 20px;
+            margin-bottom: 20px;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .footer-links h3::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #ff6b6b;
+        }
+        
+        .footer-links ul {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 10px;
+        }
+        
+        .footer-links a {
+            text-decoration: none;
+            color: #fff;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: #ff6b6b;
+        }
+        
+        .social-icons {
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+            margin-top: 20px;
+        }
+        
+        .social-icon {
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 18px;
+            color: #fff;
+            transition: background-color 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            background-color: #ff6b6b;
+        }
+        
+        .copyright {
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 14px;
+        }

@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/png" href="Imagens/ico.png">
+    <title>Flor de Lótus - Clinica Integrada</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="css/style3.css" rel="stylesheet">
+    <script src="https://sdk.mercadopago.com/js/v2"></script>
+    <link rel="manifest" href="/manifest.json">
+</head>
+<body>
+    
+  
+
+    <div class="container mt-5">
+        <div class="row justify-content-center"> 
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white d-flex align-items-center justify-content-center">
+                        <img src="Imagens/logo.png" alt="c" class="logo-header me-2" style="height: 30px;">
+                        <h3 class="text-center">Login</h3>
+                    </div>
+                    <div class="card-body">
+                        <form id="login-form">
+                            <div class="mb-3">
+                                <label for="email" class="form-label">Email</label>
+                                <input type="email" class="form-control" id="email" required>
+                            </div>
+                            <div class="mb-3">
+                                <label for="senha" class="form-label">Senha</label>
+                                <input type="password" class="form-control" id="senha" required>
+                            </div>
+                            <div class="d-grid">
+                                <button type="submit" class="btn btn-primary">Entrar</button>
+                            </div>
+                        </form>
+                        <div class="mt-3 text-center">
+                            <p>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></p>
+                            <p><a href="#" id="esqueci-senha">Esqueci minha senha</a></p>
+                        </div>
+                        <div id="login-message" class="mt-3 text-center"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal de Recuperação de Senha -->
+    <div class="modal fade" id="recoveryModal" tabindex="-1">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Recuperar Senha</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+                </div>
+                <div class="modal-body">
+                    <form id="recovery-form">
+                        <div class="mb-3">
+                            <label for="recovery-email" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="recovery-email" required>
+                        </div>
+                        <div class="d-grid">
+                            <button type="submit" class="btn btn-primary">Enviar Link</button>
+                        </div>
+                    </form>
+                    <div id="recovery-message" class="mt-3 text-center"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  
+    
+    
+    <script type="module" src="src/database.js"></script>
+    <script type="module" src="src/auth.js"></script>
+  
+</body>
+</html>
